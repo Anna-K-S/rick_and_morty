@@ -24,6 +24,7 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
+.metadata
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -50,3 +51,6 @@ ios/*.xcodeproj/*
 ios/*.xcuserdata/
 ios/Runner/Info.plist
 ios/Runner/Assets.xcassets/
+
+# Dependencies
+pubspec.lock
