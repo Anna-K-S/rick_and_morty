@@ -10,5 +10,5 @@ abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
 
   @GET('/character')
-  Future<CharacterResponse> getCharacters();
+  Future<CharacterResponse> getCharacters({@Query("page") int? page});
 }
