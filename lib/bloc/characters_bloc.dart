@@ -9,45 +9,56 @@ part 'characters_state.dart';
 part 'characters_bloc.freezed.dart';
 
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
-  final ICharacterRepository repository;
+  final ICharacterRepository _repository;
 
-  int _currentPage = 1;
-
-  CharactersBloc(this.repository) : super(const CharactersState.initial()) {
-    on<Started>(_onStarted, transformer: sequential());
-    on<LoadMore>(_onLoadMore, transformer: sequential());
-    on<Refresh>(_onRefresh, transformer: sequential());
+  CharactersBloc(this._repository)
+      : super(const CharactersState.initial(currentPage: 1)) {
+    on<CharactersEvent>(
+      (event, emit) => switch (event) {
+        Started() => _onStarted(emit),
+        LoadMore() => _onLoadMore(emit),
+        Refresh() => _onRefresh(emit),
+      },
+      transformer: sequential(),
+    );
   }
-
-  Future<void> _onStarted(Started event, Emitter<CharactersState> emit) async {
-    emit(const CharactersState.loading(null));
+  Future<void> _onStarted(Emitter<CharactersState> emit) async {
+    emit(CharactersState.loading(
+      characters: state.characters,
+      currentPage: state.currentPage,
+    ));
     try {
-      final characters = await repository.getAll(page: _currentPage);
+      final characters = await _repository.getAll(page: state.currentPage);
 
-      emit(CharactersState.loaded(characters.results));
-
-      _currentPage = 1;
+      emit(CharactersState.loaded(
+        characters: characters.results,
+        currentPage: state.currentPage,
+      ));
     } catch (e) {
       emit(
-        CharactersState.error(e.toString()),
+        CharactersState.error(
+          message: e.toString(),
+          currentPage: state.currentPage,
+          characters: state.characters,
+        ),
       );
     }
   }
 
-  Future<void> _onLoadMore(
-      LoadMore event, Emitter<CharactersState> emit) async {
-    if (state is! Loaded) return;
-    final currentState = state as Loaded;
-
-    emit(CharactersState.loading(currentState.characters));
+  Future<void> _onLoadMore(Emitter<CharactersState> emit) async {
+    final currentState = state;
+    if (currentState is! Loaded) return;
+    emit(CharactersState.loading(
+        characters: currentState.characters, currentPage: state.currentPage));
     try {
-      _currentPage++;
-
-      final newCharacters = await repository.getAll(page: _currentPage);
+      final newCharacters = await _repository.getAll(page: state.currentPage);
 
       if (newCharacters.results.isEmpty) {
-        emit(CharactersState.loaded(currentState.characters));
-        _currentPage--;
+        emit(CharactersState.loaded(
+          characters: currentState.characters,
+          currentPage: state.currentPage,
+        ));
+
         return;
       }
 
@@ -56,23 +67,40 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
         ...newCharacters.results
       ];
 
-      emit(CharactersState.loaded(updatedCharacters));
+      emit(CharactersState.loaded(
+        characters: updatedCharacters,
+        currentPage: state.currentPage + 1,
+      ));
+      currentState;
     } catch (e) {
       emit(
-        CharactersState.error(e.toString()),
+        CharactersState.error(
+          message: e.toString(),
+          characters: currentState.characters,
+          currentPage: state.currentPage,
+        ),
       );
     }
   }
 
-  Future<void> _onRefresh(Refresh event, Emitter<CharactersState> emit) async {
-    emit(const CharactersState.loading(null));
+  Future<void> _onRefresh(Emitter<CharactersState> emit) async {
+    emit(CharactersState.loading(
+      currentPage: state.currentPage,
+      characters: state.characters,
+    ));
     try {
-      _currentPage = 1;
-      final characters = await repository.getAll(page: _currentPage);
-      emit(CharactersState.loaded(characters.results));
+      final characters = await _repository.getAll(page: state.currentPage);
+      emit(CharactersState.loaded(
+        currentPage: state.currentPage + 1,
+        characters: characters.results,
+      ));
     } catch (e) {
       emit(
-        CharactersState.error(e.toString()),
+        CharactersState.error(
+          message: e.toString(),
+          characters: state.characters,
+          currentPage: state.currentPage,
+        ),
       );
     }
   }
