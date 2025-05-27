@@ -1,17 +1,17 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
+import 'package:mocktail/mocktail.dart';
 import 'package:rick_and_morty/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/data/models/character.dart';
 import 'package:rick_and_morty/data/models/character_list.dart';
 import 'package:rick_and_morty/data/models/info.dart';
+import 'package:rick_and_morty/data/repository/character_repository.dart';
 
-import 'mock_generator.mocks.dart';
+class MockCharacterRepository extends Mock implements ICharacterRepository {}
 
 void main() {
   late CharactersBloc charactersBloc;
-  late MockICharacterRepository mockRepository;
+  late MockCharacterRepository mockRepository;
 
   final testCharacters = [
     Character(
@@ -29,17 +29,17 @@ void main() {
       image: 'https://example.com/morty.png',
     ),
   ];
-  final testInfo = Info(
-    count: 2,
-    pages: 1,
+
+  final testCharacterList = CharacterList(
+    results: testCharacters,
+    info: const Info(count: 2, pages: 1),
   );
 
-  final testCharacterList =
-      CharacterList(results: testCharacters, info: testInfo);
-
   setUp(() {
-    mockRepository = MockICharacterRepository();
+    mockRepository = MockCharacterRepository();
     charactersBloc = CharactersBloc(mockRepository);
+
+    registerFallbackValue(const CharactersEvent.started());
   });
 
   tearDown(() {
@@ -50,7 +50,7 @@ void main() {
     blocTest<CharactersBloc, CharactersState>(
       'emits [loading, loaded] when Started is added',
       build: () {
-        when(mockRepository.getAll(page: 1))
+        when(() => mockRepository.getAll(page: 1))
             .thenAnswer((_) async => testCharacterList);
         return charactersBloc;
       },
@@ -64,7 +64,7 @@ void main() {
     blocTest<CharactersBloc, CharactersState>(
       'emits [loading, loaded] with more characters when LoadedMore is added',
       build: () {
-        when(mockRepository.getAll(page: 2))
+        when(() => mockRepository.getAll(page: 2))
             .thenAnswer((_) async => testCharacterList);
         return charactersBloc;
       },
@@ -85,7 +85,7 @@ void main() {
     blocTest<CharactersBloc, CharactersState>(
       'emits [loading, loaded] when Refreshed is added',
       build: () {
-        when(mockRepository.getAll(page: 1))
+        when(() => mockRepository.getAll(page: 1))
             .thenAnswer((_) async => testCharacterList);
         return charactersBloc;
       },
@@ -103,13 +103,13 @@ void main() {
     blocTest<CharactersBloc, CharactersState>(
       'emits [loading, error] when Started throws',
       build: () {
-        when(mockRepository.getAll(page: 1)).thenThrow(Exception('API Error'));
+        when(() => mockRepository.getAll(page: 1))
+            .thenThrow(Exception('API Error'));
         return charactersBloc;
       },
       act: (bloc) => bloc.add(const CharactersEvent.started()),
       expect: () => [
-        CharactersState.loading(
-            currentPage: 1, characters: charactersBloc.state.characters),
+        CharactersState.loading(currentPage: 1, characters: []),
         CharactersState.error(
           currentPage: 1,
           characters: [],
