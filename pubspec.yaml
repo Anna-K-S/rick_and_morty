@@ -19,6 +19,10 @@ dependencies:
   json_annotation: ^4.9.0
   retrofit: ^4.4.2
   dio: ^5.8.0+1
+  bloc: ^9.0.0
+  bloc_concurrency: ^0.3.0
+  flutter_bloc: ^9.1.1
+  
  
 
 dev_dependencies:
@@ -32,7 +36,8 @@ dev_dependencies:
   freezed: ^2.5.7
   json_serializable: ^6.8.0
   retrofit_generator: ^9.2.0
-
+  mocktail: ^1.0.4
+  bloc_test: ^10.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
