@@ -16,8 +16,8 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     on<CharactersEvent>(
       (event, emit) => switch (event) {
         Started() => _onStarted(emit),
-        LoadMore() => _onLoadMore(emit),
-        Refresh() => _onRefresh(emit),
+        LoadedMore() => _onLoadedMore(emit),
+        Refreshed() => _onRefreshed(emit),
       },
       transformer: sequential(),
     );
@@ -45,13 +45,15 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     }
   }
 
-  Future<void> _onLoadMore(Emitter<CharactersState> emit) async {
+  Future<void> _onLoadedMore(Emitter<CharactersState> emit) async {
     final currentState = state;
     if (currentState is! Loaded) return;
     emit(CharactersState.loading(
-        characters: currentState.characters, currentPage: state.currentPage));
+        characters: currentState.characters,
+        currentPage: state.currentPage + 1));
     try {
-      final newCharacters = await _repository.getAll(page: state.currentPage);
+      final newCharacters =
+          await _repository.getAll(page: state.currentPage + 1);
 
       if (newCharacters.results.isEmpty) {
         emit(CharactersState.loaded(
@@ -71,7 +73,6 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
         characters: updatedCharacters,
         currentPage: state.currentPage + 1,
       ));
-      currentState;
     } catch (e) {
       emit(
         CharactersState.error(
@@ -83,7 +84,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     }
   }
 
-  Future<void> _onRefresh(Emitter<CharactersState> emit) async {
+  Future<void> _onRefreshed(Emitter<CharactersState> emit) async {
     emit(CharactersState.loading(
       currentPage: state.currentPage,
       characters: state.characters,
@@ -91,7 +92,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     try {
       final characters = await _repository.getAll(page: state.currentPage);
       emit(CharactersState.loaded(
-        currentPage: state.currentPage + 1,
+        currentPage: state.currentPage,
         characters: characters.results,
       ));
     } catch (e) {
