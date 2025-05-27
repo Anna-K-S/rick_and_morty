@@ -48,17 +48,16 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   Future<void> _onLoadedMore(Emitter<CharactersState> emit) async {
     final currentState = state;
     if (currentState is! Loaded) return;
+    final nextPage = currentState.currentPage + 1;
     emit(CharactersState.loading(
-        characters: currentState.characters,
-        currentPage: state.currentPage + 1));
+        characters: currentState.characters, currentPage: nextPage));
     try {
-      final newCharacters =
-          await _repository.getAll(page: state.currentPage + 1);
+      final newCharacters = await _repository.getAll(page: nextPage);
 
       if (newCharacters.results.isEmpty) {
         emit(CharactersState.loaded(
           characters: currentState.characters,
-          currentPage: state.currentPage,
+          currentPage: currentState.currentPage,
         ));
 
         return;
@@ -71,14 +70,14 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
       emit(CharactersState.loaded(
         characters: updatedCharacters,
-        currentPage: state.currentPage + 1,
+        currentPage: nextPage,
       ));
     } catch (e) {
       emit(
         CharactersState.error(
           message: e.toString(),
           characters: currentState.characters,
-          currentPage: state.currentPage,
+          currentPage: currentState.currentPage,
         ),
       );
     }
