@@ -56,8 +56,14 @@ void main() {
       },
       act: (bloc) => bloc.add(const CharactersEvent.started()),
       expect: () => [
-        CharactersState.loading(currentPage: 1, characters: []),
-        CharactersState.loaded(currentPage: 1, characters: testCharacters),
+        CharactersState.loading(
+          currentPage: 1,
+          characters: [],
+        ),
+        CharactersState.loaded(
+          currentPage: 1,
+          characters: testCharacters,
+        ),
       ],
     );
 
@@ -74,7 +80,10 @@ void main() {
       ),
       act: (bloc) => bloc.add(const CharactersEvent.loadedMore()),
       expect: () => [
-        CharactersState.loading(currentPage: 2, characters: testCharacters),
+        CharactersState.loading(
+          currentPage: 2,
+          characters: testCharacters,
+        ),
         CharactersState.loaded(
           currentPage: 2,
           characters: [...testCharacters, ...testCharacters],
@@ -95,8 +104,14 @@ void main() {
       ),
       act: (bloc) => bloc.add(const CharactersEvent.refreshed()),
       expect: () => [
-        CharactersState.loading(currentPage: 1, characters: testCharacters),
-        CharactersState.loaded(currentPage: 1, characters: testCharacters),
+        CharactersState.loading(
+          currentPage: 1,
+          characters: testCharacters,
+        ),
+        CharactersState.loaded(
+          currentPage: 1,
+          characters: testCharacters,
+        ),
       ],
     );
 
@@ -109,7 +124,10 @@ void main() {
       },
       act: (bloc) => bloc.add(const CharactersEvent.started()),
       expect: () => [
-        CharactersState.loading(currentPage: 1, characters: []),
+        CharactersState.loading(
+          currentPage: 1,
+          characters: [],
+        ),
         CharactersState.error(
           currentPage: 1,
           characters: [],

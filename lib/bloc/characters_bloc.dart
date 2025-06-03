@@ -33,6 +33,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       emit(CharactersState.loaded(
         characters: characters.results,
         currentPage: state.currentPage,
+        hasMore: characters.results.isNotEmpty,
       ));
     } catch (e) {
       emit(
@@ -47,39 +48,38 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Future<void> _onLoadedMore(Emitter<CharactersState> emit) async {
     final currentState = state;
-    if (currentState is! Loaded) return;
+    if (currentState is! Loaded || !currentState.hasMore) return;
+
     final nextPage = currentState.currentPage + 1;
+
     emit(CharactersState.loading(
-        characters: currentState.characters, currentPage: nextPage));
+      characters: currentState.characters,
+      currentPage: nextPage,
+    ));
+
+    await Future.delayed(
+      const Duration(milliseconds: 300),
+    );
+
     try {
       final newCharacters = await _repository.getAll(page: nextPage);
 
-      if (newCharacters.results.isEmpty) {
-        emit(CharactersState.loaded(
-          characters: currentState.characters,
-          currentPage: currentState.currentPage,
-        ));
-
-        return;
-      }
-
       final updatedCharacters = [
         ...currentState.characters,
-        ...newCharacters.results
+        ...newCharacters.results,
       ];
 
       emit(CharactersState.loaded(
         characters: updatedCharacters,
         currentPage: nextPage,
+        hasMore: newCharacters.results.isNotEmpty,
       ));
     } catch (e) {
-      emit(
-        CharactersState.error(
-          message: e.toString(),
-          characters: currentState.characters,
-          currentPage: currentState.currentPage,
-        ),
-      );
+      emit(CharactersState.error(
+        message: e.toString(),
+        characters: currentState.characters,
+        currentPage: currentState.currentPage,
+      ));
     }
   }
 
@@ -93,6 +93,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       emit(CharactersState.loaded(
         currentPage: state.currentPage,
         characters: characters.results,
+        hasMore: characters.results.isNotEmpty,
       ));
     } catch (e) {
       emit(
