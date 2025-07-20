@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/bloc/characters/characters_bloc.dart';
+import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
 import 'package:rick_and_morty/data/models/character.dart';
 import 'package:rick_and_morty/widgets/character_card.dart';
 import 'package:rick_and_morty/widgets/character_dialog.dart';
@@ -27,9 +28,6 @@ class CharactersGrid extends StatelessWidget {
         context.read<CharactersBloc>().add(
               const CharactersEvent.refreshed(),
             );
-        // await context.read<CharactersBloc>().stream.firstWhere(
-        //       (state) => state is! Loading,
-        //     );
       },
       color: Colors.yellow[700],
       backgroundColor: Colors.green[900],
@@ -61,13 +59,21 @@ class CharactersGrid extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     final character = characters[index];
+
                     return CharacterCard(
-                      character: character,
-                      onTap: () => CharacterDialog.show(
-                        context,
-                        character,
-                      ),
-                    );
+                        character: character,
+                        onTap: () async {
+                          final bloc = context.read<FavoritesBloc>();
+                          final favoriteIds =
+                              await bloc.repository.getFavoriteIds();
+                          final isFavorite = favoriteIds.contains(character.id);
+
+                          CharacterDialog.show(context, character, isFavorite,
+                              () {
+                            bloc.add(FavoritesCharactersEvent.toggled(
+                                character: character));
+                          });
+                        });
                   },
                   childCount: characters.length,
                 ),

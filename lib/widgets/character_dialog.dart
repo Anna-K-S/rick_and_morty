@@ -3,17 +3,53 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/data/models/character.dart';
 
-class CharacterDialog extends StatelessWidget {
+class CharacterDialog extends StatefulWidget {
   final Character character;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
-  const CharacterDialog({super.key, required this.character});
+  const CharacterDialog({
+    super.key,
+    required this.character,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
+  });
 
-  static void show(BuildContext context, Character character) {
+  static void show(
+    BuildContext context,
+    Character character,
+    bool isFavorite,
+    VoidCallback onFavoriteToggle,
+  ) {
     showDialog(
       context: context,
       barrierDismissible: true,
-      builder: (context) => CharacterDialog(character: character),
+      builder: (context) => CharacterDialog(
+        character: character,
+        isFavorite: isFavorite,
+        onFavoriteToggle: onFavoriteToggle,
+      ),
     );
+  }
+
+  @override
+  State<CharacterDialog> createState() => _CharacterDialogState();
+}
+
+class _CharacterDialogState extends State<CharacterDialog> {
+  late bool _isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = widget.isFavorite;
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
+    widget.onFavoriteToggle();
   }
 
   @override
@@ -37,7 +73,7 @@ class CharacterDialog extends StatelessWidget {
                   children: [
                     Center(
                       child: CachedNetworkImage(
-                        imageUrl: character.image,
+                        imageUrl: widget.character.image,
                         width: 250,
                         height: 250,
                         placeholder: (context, url) =>
@@ -53,7 +89,7 @@ class CharacterDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      character.name,
+                      widget.character.name,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -62,22 +98,17 @@ class CharacterDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Status: ${character.status}\nSpecies: ${character.species}',
+                      'Status: ${widget.character.status}\nSpecies: ${widget.character.species}',
                       style: const TextStyle(color: Colors.white70),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 12),
                     IconButton(
-                      icon: Icon(
-                        // character.isFavorite
-                        Icons.star,
-                        // : Icons.star_border,
-                        color: Colors.yellow[700],
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+                        icon: Icon(
+                          _isFavorite ? Icons.star : Icons.star_border_outlined,
+                          color: Colors.yellow[700],
+                        ),
+                        onPressed: _toggleFavorite),
                   ],
                 ),
               ),
