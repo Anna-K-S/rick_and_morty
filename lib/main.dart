@@ -51,10 +51,11 @@ class MyApp extends StatelessWidget {
               )..add(const CharactersEvent.started()),
             ),
             BlocProvider(
-                create: (context) => FavoritesBloc(
-                      context.read<IFavoritesRepository>(),
-                      context.read<ICharacterRepository>(),
-                    )),
+              lazy: false,
+              create: (context) => FavoritesBloc(
+                context.read<IFavoritesRepository>(),
+              )..add(const FavoritesCharactersEvent.loaded()),
+            ),
           ],
           child: const CharactersScreen(),
         ),
