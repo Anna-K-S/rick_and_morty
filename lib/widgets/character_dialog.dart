@@ -1,59 +1,50 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
 import 'package:rick_and_morty/data/models/character.dart';
 
-class CharacterDialog extends StatefulWidget {
+class CharacterDialog extends StatelessWidget {
   final Character character;
-  final bool isFavorite;
-  final VoidCallback onFavoriteToggle;
+  final ValueChanged<bool> onFavoriteToggle;
 
   const CharacterDialog({
     super.key,
     required this.character,
-    required this.isFavorite,
     required this.onFavoriteToggle,
   });
 
   static void show(
     BuildContext context,
     Character character,
-    bool isFavorite,
-    VoidCallback onFavoriteToggle,
+    ValueChanged<bool> onFavoriteToggle,
   ) {
     showDialog(
       context: context,
       barrierDismissible: true,
-      builder: (context) => CharacterDialog(
-        character: character,
-        isFavorite: isFavorite,
-        onFavoriteToggle: onFavoriteToggle,
-      ),
+      builder: (_) {
+        return BlocProvider.value(
+          value: context.read<FavoritesBloc>(),
+          child: CharacterDialog(
+            character: character,
+            onFavoriteToggle: onFavoriteToggle,
+          ),
+        );
+      },
     );
   }
 
   @override
-  State<CharacterDialog> createState() => _CharacterDialogState();
-}
-
-class _CharacterDialogState extends State<CharacterDialog> {
-  late bool _isFavorite;
-
-  @override
-  void initState() {
-    super.initState();
-    _isFavorite = widget.isFavorite;
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      _isFavorite = !_isFavorite;
-    });
-    widget.onFavoriteToggle();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isFavorite = context.select(
+      (FavoritesBloc bloc) => switch (bloc.state) {
+        FavoritesCharactersLoaded(:final favorites) =>
+          favorites.contains(character.id),
+        _ => false,
+      },
+    );
+
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Stack(
@@ -73,7 +64,7 @@ class _CharacterDialogState extends State<CharacterDialog> {
                   children: [
                     Center(
                       child: CachedNetworkImage(
-                        imageUrl: widget.character.image,
+                        imageUrl: character.image,
                         width: 250,
                         height: 250,
                         placeholder: (context, url) =>
@@ -89,7 +80,7 @@ class _CharacterDialogState extends State<CharacterDialog> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      widget.character.name,
+                      character.name,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -98,17 +89,19 @@ class _CharacterDialogState extends State<CharacterDialog> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Status: ${widget.character.status}\nSpecies: ${widget.character.species}',
+                      'Status: ${character.status}\nSpecies: ${character.species}',
                       style: const TextStyle(color: Colors.white70),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 12),
                     IconButton(
                         icon: Icon(
-                          _isFavorite ? Icons.star : Icons.star_border_outlined,
+                          isFavorite ? Icons.star : Icons.star_border_outlined,
                           color: Colors.yellow[700],
                         ),
-                        onPressed: _toggleFavorite),
+                        onPressed: () {
+                          onFavoriteToggle(!isFavorite);
+                        }),
                   ],
                 ),
               ),

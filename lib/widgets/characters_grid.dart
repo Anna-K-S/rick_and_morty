@@ -64,14 +64,15 @@ class CharactersGrid extends StatelessWidget {
                         character: character,
                         onTap: () async {
                           final bloc = context.read<FavoritesBloc>();
-                          final favoriteIds =
-                              await bloc.repository.getFavoriteIds();
-                          final isFavorite = favoriteIds.contains(character.id);
 
-                          CharacterDialog.show(context, character, isFavorite,
-                              () {
-                            bloc.add(FavoritesCharactersEvent.toggled(
-                                character: character));
+                          CharacterDialog.show(context, character,
+                              (isFavorite) {
+                            bloc.add(
+                              FavoritesCharactersEvent.toggled(
+                                id: character.id,
+                                isFavorite: isFavorite,
+                              ),
+                            );
                           });
                         });
                   },
