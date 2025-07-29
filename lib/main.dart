@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/bloc/characters/characters_bloc.dart';
 import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
+import 'package:rick_and_morty/data/models/dd.dart';
 import 'package:rick_and_morty/data/repository/character_repository.dart';
 import 'package:rick_and_morty/data/repository/favorites_characters_repository.dart';
-import 'package:rick_and_morty/screens/characters_screen.dart';
 import 'package:rick_and_morty/service/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
               )..add(const FavoritesCharactersEvent.loaded()),
             ),
           ],
-          child: const CharactersScreen(),
+          child: const HomeScreen(),
         ),
       ),
     );

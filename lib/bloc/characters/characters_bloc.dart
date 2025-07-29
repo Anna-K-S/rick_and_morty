@@ -48,7 +48,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Future<void> _onLoadedMore(Emitter<CharactersState> emit) async {
     final currentState = state;
-    if (currentState is! Loaded || !currentState.hasMore) return;
+    if (currentState is! CharactersLoaded || !currentState.hasMore) return;
 
     final nextPage = currentState.currentPage + 1;
 
