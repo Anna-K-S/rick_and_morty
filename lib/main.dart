@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/bloc/characters/characters_bloc.dart';
 import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
-import 'package:rick_and_morty/data/models/dd.dart';
+import 'package:rick_and_morty/screens/base_screen.dart';
 import 'package:rick_and_morty/data/repository/character_repository.dart';
 import 'package:rick_and_morty/data/repository/favorites_characters_repository.dart';
 import 'package:rick_and_morty/service/api.dart';
