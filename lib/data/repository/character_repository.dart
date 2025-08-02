@@ -25,23 +25,18 @@ class CharacterRepository implements ICharacterRepository {
 
   @override
   Future<List<Character>> getByIds(Set<int> ids) async {
-    List<Character> matched = [];
+    if (ids.isEmpty) return [];
 
-    int currentPage = 1;
-    bool hasMore = true;
+    final response = await _api.getCharactersByIds(ids.join(','));
 
-    if (hasMore) {
-      final result = await _api.getAllCharacters(page: currentPage);
-
-      final pageMatches = result.results
-          .where((character) => ids.contains(character.id))
-          .toList();
-      matched.addAll(pageMatches);
-
-      hasMore = result.results.length == 20;
-      currentPage++;
+    if (ids.length == 1) {
+      return [Character.fromJson(response)];
     }
-
-    return matched;
+    if (ids.length > 1) {
+      return (response as List)
+          .map((json) => Character.fromJson(json))
+          .toList();
+    }
+    throw Exception('Unexpected response format for character IDs: $ids');
   }
 }

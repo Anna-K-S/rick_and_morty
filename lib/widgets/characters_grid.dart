@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rick_and_morty/bloc/characters/characters_bloc.dart';
 import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
 import 'package:rick_and_morty/data/models/character.dart';
@@ -47,9 +48,27 @@ class CharactersGrid extends StatelessWidget {
             ),
           if (characters.isEmpty && !isLoading)
             // если нет персонажей и не идёт загрузка — показываем сообщение
-            const SliverFillRemaining(
+            SliverFillRemaining(
               child: Center(
-                child: Text('No characters found'),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 16,
+                  children: [
+                    Lottie.asset(
+                      'assets/morty_cry.json',
+                      height: 250,
+                      width: 250,
+                      repeat: true,
+                    ),
+                    Text(
+                      'Your favorites list is empty',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           if (characters.isNotEmpty)

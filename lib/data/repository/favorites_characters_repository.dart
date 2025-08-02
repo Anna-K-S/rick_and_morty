@@ -25,7 +25,7 @@ class FavoritesRepository implements IFavoritesRepository {
   // если персонаж есть в избранном,то удалить, а иначе добавить
   Future<void> toggleFavorite(int characterId) async {
     final favoriteIds = prefs.getStringList(_favoritesKey) ?? [];
-    // елси id уже есть, то удаляем его
+    // если id уже есть, то удаляем его
     if (favoriteIds.contains(characterId.toString())) {
       favoriteIds.remove(characterId.toString());
 

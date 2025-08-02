@@ -42,14 +42,13 @@ class _FavoritesCharactersScreenState extends State<FavoritesCharactersScreen> {
 
           if (state is FavoritesCharactersLoading && favoriteIds.isEmpty) {
             return Center(
-                child: Center(
               child: Lottie.asset(
                 'assets/the_morty_dance_loader.json',
                 height: 300,
                 width: 300,
                 repeat: true,
               ),
-            ));
+            );
           }
           if (favoriteIds.isEmpty) {
             return Center(
@@ -89,21 +88,19 @@ class _FavoritesCharactersScreenState extends State<FavoritesCharactersScreen> {
               }
 
               if (snapshot.hasError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          context
-                              .read<FavoritesBloc>()
-                              .add(const CharacterFavoriteLoaded());
-                        },
-                        child: const Text('Try again'),
-                      ),
-                    ],
-                  ),
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<FavoritesBloc>()
+                            .add(const CharacterFavoriteLoaded());
+                      },
+                      child: const Text('Try again'),
+                    ),
+                  ],
                 );
               }
 
