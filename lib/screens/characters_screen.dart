@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/characters_bloc.dart';
+import '../bloc/characters/characters_bloc.dart';
 import '../../widgets/characters_grid.dart';
 
 class CharactersScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
 
   void _onScroll() {
     final state = context.read<CharactersBloc>().state;
-    if (state is Loaded && state.hasMore) {
+    if (state is CharactersLoaded && state.hasMore) {
       final position = _scrollController.position;
       const loadThreshold = 0.8;
       if (position.pixels >= position.maxScrollExtent * loadThreshold) {
@@ -47,24 +47,25 @@ class _CharactersScreenState extends State<CharactersScreen> {
       ),
       body: BlocBuilder<CharactersBloc, CharactersState>(
         builder: (context, state) {
-          final isLoadingMore = state is Loading && state.characters.isNotEmpty;
+          final isLoadingMore =
+              state is CharactersLoading && state.characters.isNotEmpty;
           return switch (state) {
-            Initial() => const Center(
+            CharactersInitial() => const Center(
                 child: Text(
                   'Loading characters...',
                 ),
               ),
-            Loading(characters: final characters) => CharactersGrid(
+            CharactersLoading(characters: final characters) => CharactersGrid(
                 characters: characters,
                 isLoading: isLoadingMore,
                 scrollController: _scrollController,
               ),
-            Loaded(characters: final characters) => CharactersGrid(
+            CharactersLoaded(characters: final characters) => CharactersGrid(
                 characters: characters,
                 isLoading: false,
                 scrollController: _scrollController,
               ),
-            Error(
+            CharactersError(
               message: final message,
               characters: final characters,
             ) =>
