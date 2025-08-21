@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/characters_bloc.dart';
+import 'package:rick_and_morty/widgets/sort_mtnu_button.dart';
+import '../bloc/characters/characters_bloc.dart';
 import '../../widgets/characters_grid.dart';
 
 class CharactersScreen extends StatefulWidget {
@@ -19,17 +20,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
     _scrollController.addListener(_onScroll);
   }
 
-  void _onScroll() {
-    final state = context.read<CharactersBloc>().state;
-    if (state is Loaded && state.hasMore) {
-      final position = _scrollController.position;
-      const loadThreshold = 0.8;
-      if (position.pixels >= position.maxScrollExtent * loadThreshold) {
-        context.read<CharactersBloc>().add(const CharactersEvent.loadedMore());
-      }
-    }
-  }
-
   @override
   void dispose() {
     _scrollController
@@ -44,27 +34,46 @@ class _CharactersScreenState extends State<CharactersScreen> {
       appBar: AppBar(
         title: const Text('Rick and Morty'),
         backgroundColor: Colors.green[900],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+          BlocBuilder<CharactersBloc, CharactersState>(
+              builder: (context, state) {
+            final filter = state.filter;
+
+            return SortMenuButton(
+              currentFilter: filter,
+              onSelected: (newFilter) {
+                context.read<CharactersBloc>().add(
+                      CharactersEvent.filterChanged(newFilter),
+                    );
+              },
+            );
+          }),
+        ],
       ),
       body: BlocBuilder<CharactersBloc, CharactersState>(
         builder: (context, state) {
-          final isLoadingMore = state is Loading && state.characters.isNotEmpty;
+          final isLoadingMore =
+              state is CharactersLoading && state.characters.isNotEmpty;
           return switch (state) {
-            Initial() => const Center(
+            CharactersInitial() => const Center(
                 child: Text(
                   'Loading characters...',
                 ),
               ),
-            Loading(characters: final characters) => CharactersGrid(
+            CharactersLoading(characters: final characters) => CharactersGrid(
                 characters: characters,
                 isLoading: isLoadingMore,
                 scrollController: _scrollController,
               ),
-            Loaded(characters: final characters) => CharactersGrid(
+            CharactersLoaded(characters: final characters) => CharactersGrid(
                 characters: characters,
                 isLoading: false,
                 scrollController: _scrollController,
               ),
-            Error(
+            CharactersError(
               message: final message,
               characters: final characters,
             ) =>
@@ -78,5 +87,16 @@ class _CharactersScreenState extends State<CharactersScreen> {
         },
       ),
     );
+  }
+
+  void _onScroll() {
+    final state = context.read<CharactersBloc>().state;
+    if (state is CharactersLoaded && state.hasMore) {
+      final position = _scrollController.position;
+      const loadThreshold = 0.8;
+      if (position.pixels >= position.maxScrollExtent * loadThreshold) {
+        context.read<CharactersBloc>().add(const CharactersEvent.loadedMore());
+      }
+    }
   }
 }
