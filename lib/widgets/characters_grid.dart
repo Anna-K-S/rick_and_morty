@@ -54,19 +54,15 @@ class CharactersGrid extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   spacing: 16,
                   children: [
-                    Lottie.asset(
-                      'assets/morty_cry.json',
-                      height: 250,
-                      width: 250,
-                      repeat: true,
-                    ),
-                    Text(
-                      'Your favorites list is empty',
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Loading characters...',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

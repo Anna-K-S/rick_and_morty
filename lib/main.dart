@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CharacterRepository(context.read<Api>()),
         ),
         RepositoryProvider<IFavoritesRepository>(
-          create: (_) => FavoritesRepository(sharedPreferences!),
+          create: (context) => FavoritesRepository(sharedPreferences!),
         ),
       ],
       child: MaterialApp(

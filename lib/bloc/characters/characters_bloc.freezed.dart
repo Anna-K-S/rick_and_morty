@@ -21,6 +21,7 @@ mixin _$CharactersEvent {
     required TResult Function() started,
     required TResult Function() loadedMore,
     required TResult Function() refreshed,
+    required TResult Function(CharacterFilter filter) filterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CharactersEvent {
     TResult? Function()? started,
     TResult? Function()? loadedMore,
     TResult? Function()? refreshed,
+    TResult? Function(CharacterFilter filter)? filterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CharactersEvent {
     TResult Function()? started,
     TResult Function()? loadedMore,
     TResult Function()? refreshed,
+    TResult Function(CharacterFilter filter)? filterChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CharactersEvent {
     required TResult Function(Started value) started,
     required TResult Function(LoadedMore value) loadedMore,
     required TResult Function(Refreshed value) refreshed,
+    required TResult Function(FilterChanged value) filterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CharactersEvent {
     TResult? Function(Started value)? started,
     TResult? Function(LoadedMore value)? loadedMore,
     TResult? Function(Refreshed value)? refreshed,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CharactersEvent {
     TResult Function(Started value)? started,
     TResult Function(LoadedMore value)? loadedMore,
     TResult Function(Refreshed value)? refreshed,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +133,7 @@ class _$StartedImpl implements Started {
     required TResult Function() started,
     required TResult Function() loadedMore,
     required TResult Function() refreshed,
+    required TResult Function(CharacterFilter filter) filterChanged,
   }) {
     return started();
   }
@@ -137,6 +144,7 @@ class _$StartedImpl implements Started {
     TResult? Function()? started,
     TResult? Function()? loadedMore,
     TResult? Function()? refreshed,
+    TResult? Function(CharacterFilter filter)? filterChanged,
   }) {
     return started?.call();
   }
@@ -147,6 +155,7 @@ class _$StartedImpl implements Started {
     TResult Function()? started,
     TResult Function()? loadedMore,
     TResult Function()? refreshed,
+    TResult Function(CharacterFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -161,6 +170,7 @@ class _$StartedImpl implements Started {
     required TResult Function(Started value) started,
     required TResult Function(LoadedMore value) loadedMore,
     required TResult Function(Refreshed value) refreshed,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return started(this);
   }
@@ -171,6 +181,7 @@ class _$StartedImpl implements Started {
     TResult? Function(Started value)? started,
     TResult? Function(LoadedMore value)? loadedMore,
     TResult? Function(Refreshed value)? refreshed,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return started?.call(this);
   }
@@ -181,6 +192,7 @@ class _$StartedImpl implements Started {
     TResult Function(Started value)? started,
     TResult Function(LoadedMore value)? loadedMore,
     TResult Function(Refreshed value)? refreshed,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -238,6 +250,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     required TResult Function() started,
     required TResult Function() loadedMore,
     required TResult Function() refreshed,
+    required TResult Function(CharacterFilter filter) filterChanged,
   }) {
     return loadedMore();
   }
@@ -248,6 +261,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     TResult? Function()? started,
     TResult? Function()? loadedMore,
     TResult? Function()? refreshed,
+    TResult? Function(CharacterFilter filter)? filterChanged,
   }) {
     return loadedMore?.call();
   }
@@ -258,6 +272,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     TResult Function()? started,
     TResult Function()? loadedMore,
     TResult Function()? refreshed,
+    TResult Function(CharacterFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (loadedMore != null) {
@@ -272,6 +287,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     required TResult Function(Started value) started,
     required TResult Function(LoadedMore value) loadedMore,
     required TResult Function(Refreshed value) refreshed,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return loadedMore(this);
   }
@@ -282,6 +298,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     TResult? Function(Started value)? started,
     TResult? Function(LoadedMore value)? loadedMore,
     TResult? Function(Refreshed value)? refreshed,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return loadedMore?.call(this);
   }
@@ -292,6 +309,7 @@ class _$LoadedMoreImpl implements LoadedMore {
     TResult Function(Started value)? started,
     TResult Function(LoadedMore value)? loadedMore,
     TResult Function(Refreshed value)? refreshed,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (loadedMore != null) {
@@ -349,6 +367,7 @@ class _$RefreshedImpl implements Refreshed {
     required TResult Function() started,
     required TResult Function() loadedMore,
     required TResult Function() refreshed,
+    required TResult Function(CharacterFilter filter) filterChanged,
   }) {
     return refreshed();
   }
@@ -359,6 +378,7 @@ class _$RefreshedImpl implements Refreshed {
     TResult? Function()? started,
     TResult? Function()? loadedMore,
     TResult? Function()? refreshed,
+    TResult? Function(CharacterFilter filter)? filterChanged,
   }) {
     return refreshed?.call();
   }
@@ -369,6 +389,7 @@ class _$RefreshedImpl implements Refreshed {
     TResult Function()? started,
     TResult Function()? loadedMore,
     TResult Function()? refreshed,
+    TResult Function(CharacterFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (refreshed != null) {
@@ -383,6 +404,7 @@ class _$RefreshedImpl implements Refreshed {
     required TResult Function(Started value) started,
     required TResult Function(LoadedMore value) loadedMore,
     required TResult Function(Refreshed value) refreshed,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return refreshed(this);
   }
@@ -393,6 +415,7 @@ class _$RefreshedImpl implements Refreshed {
     TResult? Function(Started value)? started,
     TResult? Function(LoadedMore value)? loadedMore,
     TResult? Function(Refreshed value)? refreshed,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return refreshed?.call(this);
   }
@@ -403,6 +426,7 @@ class _$RefreshedImpl implements Refreshed {
     TResult Function(Started value)? started,
     TResult Function(LoadedMore value)? loadedMore,
     TResult Function(Refreshed value)? refreshed,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (refreshed != null) {
@@ -417,52 +441,221 @@ abstract class Refreshed implements CharactersEvent {
 }
 
 /// @nodoc
+abstract class _$$FilterChangedImplCopyWith<$Res> {
+  factory _$$FilterChangedImplCopyWith(
+          _$FilterChangedImpl value, $Res Function(_$FilterChangedImpl) then) =
+      __$$FilterChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CharacterFilter filter});
+
+  $CharacterFilterCopyWith<$Res> get filter;
+}
+
+/// @nodoc
+class __$$FilterChangedImplCopyWithImpl<$Res>
+    extends _$CharactersEventCopyWithImpl<$Res, _$FilterChangedImpl>
+    implements _$$FilterChangedImplCopyWith<$Res> {
+  __$$FilterChangedImplCopyWithImpl(
+      _$FilterChangedImpl _value, $Res Function(_$FilterChangedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filter = null,
+  }) {
+    return _then(_$FilterChangedImpl(
+      null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
+    ));
+  }
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CharacterFilterCopyWith<$Res> get filter {
+    return $CharacterFilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$FilterChangedImpl implements FilterChanged {
+  const _$FilterChangedImpl(this.filter);
+
+  @override
+  final CharacterFilter filter;
+
+  @override
+  String toString() {
+    return 'CharactersEvent.filterChanged(filter: $filter)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FilterChangedImpl &&
+            (identical(other.filter, filter) || other.filter == filter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filter);
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FilterChangedImplCopyWith<_$FilterChangedImpl> get copyWith =>
+      __$$FilterChangedImplCopyWithImpl<_$FilterChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() loadedMore,
+    required TResult Function() refreshed,
+    required TResult Function(CharacterFilter filter) filterChanged,
+  }) {
+    return filterChanged(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? loadedMore,
+    TResult? Function()? refreshed,
+    TResult? Function(CharacterFilter filter)? filterChanged,
+  }) {
+    return filterChanged?.call(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? loadedMore,
+    TResult Function()? refreshed,
+    TResult Function(CharacterFilter filter)? filterChanged,
+    required TResult orElse(),
+  }) {
+    if (filterChanged != null) {
+      return filterChanged(filter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Started value) started,
+    required TResult Function(LoadedMore value) loadedMore,
+    required TResult Function(Refreshed value) refreshed,
+    required TResult Function(FilterChanged value) filterChanged,
+  }) {
+    return filterChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Started value)? started,
+    TResult? Function(LoadedMore value)? loadedMore,
+    TResult? Function(Refreshed value)? refreshed,
+    TResult? Function(FilterChanged value)? filterChanged,
+  }) {
+    return filterChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Started value)? started,
+    TResult Function(LoadedMore value)? loadedMore,
+    TResult Function(Refreshed value)? refreshed,
+    TResult Function(FilterChanged value)? filterChanged,
+    required TResult orElse(),
+  }) {
+    if (filterChanged != null) {
+      return filterChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterChanged implements CharactersEvent {
+  const factory FilterChanged(final CharacterFilter filter) =
+      _$FilterChangedImpl;
+
+  CharacterFilter get filter;
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilterChangedImplCopyWith<_$FilterChangedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CharactersState {
   int get currentPage => throw _privateConstructorUsedError;
+  CharacterFilter get filter => throw _privateConstructorUsedError;
   List<Character> get characters => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         initial,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loading,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loaded,
-    required TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)
         error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult? Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
     required TResult orElse(),
   }) =>
@@ -506,7 +699,13 @@ abstract class $CharactersStateCopyWith<$Res> {
           CharactersState value, $Res Function(CharactersState) then) =
       _$CharactersStateCopyWithImpl<$Res, CharactersState>;
   @useResult
-  $Res call({int currentPage, List<Character> characters, bool hasMore});
+  $Res call(
+      {int currentPage,
+      CharacterFilter filter,
+      List<Character> characters,
+      bool hasMore});
+
+  $CharacterFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -525,6 +724,7 @@ class _$CharactersStateCopyWithImpl<$Res, $Val extends CharactersState>
   @override
   $Res call({
     Object? currentPage = null,
+    Object? filter = null,
     Object? characters = null,
     Object? hasMore = null,
   }) {
@@ -533,6 +733,10 @@ class _$CharactersStateCopyWithImpl<$Res, $Val extends CharactersState>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
       characters: null == characters
           ? _value.characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -542,6 +746,16 @@ class _$CharactersStateCopyWithImpl<$Res, $Val extends CharactersState>
           : hasMore // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
+  }
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CharacterFilterCopyWith<$Res> get filter {
+    return $CharacterFilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value) as $Val);
+    });
   }
 }
 
@@ -553,7 +767,14 @@ abstract class _$$CharactersInitialImplCopyWith<$Res>
       __$$CharactersInitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int currentPage, List<Character> characters, bool hasMore});
+  $Res call(
+      {int currentPage,
+      CharacterFilter filter,
+      List<Character> characters,
+      bool hasMore});
+
+  @override
+  $CharacterFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -570,6 +791,7 @@ class __$$CharactersInitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentPage = null,
+    Object? filter = null,
     Object? characters = null,
     Object? hasMore = null,
   }) {
@@ -578,6 +800,10 @@ class __$$CharactersInitialImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
       characters: null == characters
           ? _value._characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -595,12 +821,16 @@ class __$$CharactersInitialImplCopyWithImpl<$Res>
 class _$CharactersInitialImpl implements CharactersInitial {
   const _$CharactersInitialImpl(
       {required this.currentPage,
+      this.filter = const CharacterFilter(),
       final List<Character> characters = const [],
       this.hasMore = true})
       : _characters = characters;
 
   @override
   final int currentPage;
+  @override
+  @JsonKey()
+  final CharacterFilter filter;
   final List<Character> _characters;
   @override
   @JsonKey()
@@ -616,7 +846,7 @@ class _$CharactersInitialImpl implements CharactersInitial {
 
   @override
   String toString() {
-    return 'CharactersState.initial(currentPage: $currentPage, characters: $characters, hasMore: $hasMore)';
+    return 'CharactersState.initial(currentPage: $currentPage, filter: $filter, characters: $characters, hasMore: $hasMore)';
   }
 
   @override
@@ -626,13 +856,14 @@ class _$CharactersInitialImpl implements CharactersInitial {
             other is _$CharactersInitialImpl &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPage,
+  int get hashCode => Object.hash(runtimeType, currentPage, filter,
       const DeepCollectionEquality().hash(_characters), hasMore);
 
   /// Create a copy of CharactersState
@@ -647,57 +878,60 @@ class _$CharactersInitialImpl implements CharactersInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         initial,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loading,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loaded,
-    required TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)
         error,
   }) {
-    return initial(currentPage, characters, hasMore);
+    return initial(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult? Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
   }) {
-    return initial?.call(currentPage, characters, hasMore);
+    return initial?.call(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(currentPage, characters, hasMore);
+      return initial(currentPage, filter, characters, hasMore);
     }
     return orElse();
   }
@@ -743,11 +977,14 @@ class _$CharactersInitialImpl implements CharactersInitial {
 abstract class CharactersInitial implements CharactersState {
   const factory CharactersInitial(
       {required final int currentPage,
+      final CharacterFilter filter,
       final List<Character> characters,
       final bool hasMore}) = _$CharactersInitialImpl;
 
   @override
   int get currentPage;
+  @override
+  CharacterFilter get filter;
   @override
   List<Character> get characters;
   @override
@@ -769,7 +1006,14 @@ abstract class _$$CharactersLoadingImplCopyWith<$Res>
       __$$CharactersLoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int currentPage, List<Character> characters, bool hasMore});
+  $Res call(
+      {int currentPage,
+      CharacterFilter filter,
+      List<Character> characters,
+      bool hasMore});
+
+  @override
+  $CharacterFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -786,6 +1030,7 @@ class __$$CharactersLoadingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentPage = null,
+    Object? filter = null,
     Object? characters = null,
     Object? hasMore = null,
   }) {
@@ -794,6 +1039,10 @@ class __$$CharactersLoadingImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
       characters: null == characters
           ? _value._characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -811,12 +1060,16 @@ class __$$CharactersLoadingImplCopyWithImpl<$Res>
 class _$CharactersLoadingImpl implements CharactersLoading {
   const _$CharactersLoadingImpl(
       {required this.currentPage,
+      this.filter = const CharacterFilter(),
       required final List<Character> characters,
       this.hasMore = true})
       : _characters = characters;
 
   @override
   final int currentPage;
+  @override
+  @JsonKey()
+  final CharacterFilter filter;
   final List<Character> _characters;
   @override
   List<Character> get characters {
@@ -831,7 +1084,7 @@ class _$CharactersLoadingImpl implements CharactersLoading {
 
   @override
   String toString() {
-    return 'CharactersState.loading(currentPage: $currentPage, characters: $characters, hasMore: $hasMore)';
+    return 'CharactersState.loading(currentPage: $currentPage, filter: $filter, characters: $characters, hasMore: $hasMore)';
   }
 
   @override
@@ -841,13 +1094,14 @@ class _$CharactersLoadingImpl implements CharactersLoading {
             other is _$CharactersLoadingImpl &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPage,
+  int get hashCode => Object.hash(runtimeType, currentPage, filter,
       const DeepCollectionEquality().hash(_characters), hasMore);
 
   /// Create a copy of CharactersState
@@ -862,57 +1116,60 @@ class _$CharactersLoadingImpl implements CharactersLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         initial,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loading,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loaded,
-    required TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)
         error,
   }) {
-    return loading(currentPage, characters, hasMore);
+    return loading(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult? Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
   }) {
-    return loading?.call(currentPage, characters, hasMore);
+    return loading?.call(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(currentPage, characters, hasMore);
+      return loading(currentPage, filter, characters, hasMore);
     }
     return orElse();
   }
@@ -958,11 +1215,14 @@ class _$CharactersLoadingImpl implements CharactersLoading {
 abstract class CharactersLoading implements CharactersState {
   const factory CharactersLoading(
       {required final int currentPage,
+      final CharacterFilter filter,
       required final List<Character> characters,
       final bool hasMore}) = _$CharactersLoadingImpl;
 
   @override
   int get currentPage;
+  @override
+  CharacterFilter get filter;
   @override
   List<Character> get characters;
   @override
@@ -984,7 +1244,14 @@ abstract class _$$CharactersLoadedImplCopyWith<$Res>
       __$$CharactersLoadedImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int currentPage, List<Character> characters, bool hasMore});
+  $Res call(
+      {int currentPage,
+      CharacterFilter filter,
+      List<Character> characters,
+      bool hasMore});
+
+  @override
+  $CharacterFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -1001,6 +1268,7 @@ class __$$CharactersLoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentPage = null,
+    Object? filter = null,
     Object? characters = null,
     Object? hasMore = null,
   }) {
@@ -1009,6 +1277,10 @@ class __$$CharactersLoadedImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
       characters: null == characters
           ? _value._characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -1026,12 +1298,16 @@ class __$$CharactersLoadedImplCopyWithImpl<$Res>
 class _$CharactersLoadedImpl implements CharactersLoaded {
   const _$CharactersLoadedImpl(
       {required this.currentPage,
+      this.filter = const CharacterFilter(),
       required final List<Character> characters,
       this.hasMore = true})
       : _characters = characters;
 
   @override
   final int currentPage;
+  @override
+  @JsonKey()
+  final CharacterFilter filter;
   final List<Character> _characters;
   @override
   List<Character> get characters {
@@ -1046,7 +1322,7 @@ class _$CharactersLoadedImpl implements CharactersLoaded {
 
   @override
   String toString() {
-    return 'CharactersState.loaded(currentPage: $currentPage, characters: $characters, hasMore: $hasMore)';
+    return 'CharactersState.loaded(currentPage: $currentPage, filter: $filter, characters: $characters, hasMore: $hasMore)';
   }
 
   @override
@@ -1056,13 +1332,14 @@ class _$CharactersLoadedImpl implements CharactersLoaded {
             other is _$CharactersLoadedImpl &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPage,
+  int get hashCode => Object.hash(runtimeType, currentPage, filter,
       const DeepCollectionEquality().hash(_characters), hasMore);
 
   /// Create a copy of CharactersState
@@ -1077,57 +1354,60 @@ class _$CharactersLoadedImpl implements CharactersLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         initial,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loading,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loaded,
-    required TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)
         error,
   }) {
-    return loaded(currentPage, characters, hasMore);
+    return loaded(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult? Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
   }) {
-    return loaded?.call(currentPage, characters, hasMore);
+    return loaded?.call(currentPage, filter, characters, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(currentPage, characters, hasMore);
+      return loaded(currentPage, filter, characters, hasMore);
     }
     return orElse();
   }
@@ -1173,11 +1453,14 @@ class _$CharactersLoadedImpl implements CharactersLoaded {
 abstract class CharactersLoaded implements CharactersState {
   const factory CharactersLoaded(
       {required final int currentPage,
+      final CharacterFilter filter,
       required final List<Character> characters,
       final bool hasMore}) = _$CharactersLoadedImpl;
 
   @override
   int get currentPage;
+  @override
+  CharacterFilter get filter;
   @override
   List<Character> get characters;
   @override
@@ -1201,9 +1484,13 @@ abstract class _$$CharactersErrorImplCopyWith<$Res>
   @useResult
   $Res call(
       {int currentPage,
+      CharacterFilter filter,
       List<Character> characters,
       String message,
       bool hasMore});
+
+  @override
+  $CharacterFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -1220,6 +1507,7 @@ class __$$CharactersErrorImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentPage = null,
+    Object? filter = null,
     Object? characters = null,
     Object? message = null,
     Object? hasMore = null,
@@ -1229,6 +1517,10 @@ class __$$CharactersErrorImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as CharacterFilter,
       characters: null == characters
           ? _value._characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -1250,6 +1542,7 @@ class __$$CharactersErrorImplCopyWithImpl<$Res>
 class _$CharactersErrorImpl implements CharactersError {
   const _$CharactersErrorImpl(
       {required this.currentPage,
+      this.filter = const CharacterFilter(),
       required final List<Character> characters,
       required this.message,
       this.hasMore = true})
@@ -1257,6 +1550,9 @@ class _$CharactersErrorImpl implements CharactersError {
 
   @override
   final int currentPage;
+  @override
+  @JsonKey()
+  final CharacterFilter filter;
   final List<Character> _characters;
   @override
   List<Character> get characters {
@@ -1273,7 +1569,7 @@ class _$CharactersErrorImpl implements CharactersError {
 
   @override
   String toString() {
-    return 'CharactersState.error(currentPage: $currentPage, characters: $characters, message: $message, hasMore: $hasMore)';
+    return 'CharactersState.error(currentPage: $currentPage, filter: $filter, characters: $characters, message: $message, hasMore: $hasMore)';
   }
 
   @override
@@ -1283,6 +1579,7 @@ class _$CharactersErrorImpl implements CharactersError {
             other is _$CharactersErrorImpl &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
             (identical(other.message, message) || other.message == message) &&
@@ -1290,7 +1587,7 @@ class _$CharactersErrorImpl implements CharactersError {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPage,
+  int get hashCode => Object.hash(runtimeType, currentPage, filter,
       const DeepCollectionEquality().hash(_characters), message, hasMore);
 
   /// Create a copy of CharactersState
@@ -1305,57 +1602,60 @@ class _$CharactersErrorImpl implements CharactersError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         initial,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loading,
-    required TResult Function(
-            int currentPage, List<Character> characters, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)
         loaded,
-    required TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)
+    required TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)
         error,
   }) {
-    return error(currentPage, characters, message, hasMore);
+    return error(currentPage, filter, characters, message, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult? Function(
-            int currentPage, List<Character> characters, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult? Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult? Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
   }) {
-    return error?.call(currentPage, characters, message, hasMore);
+    return error?.call(currentPage, filter, characters, message, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         initial,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loading,
-    TResult Function(int currentPage, List<Character> characters, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, bool hasMore)?
         loaded,
-    TResult Function(int currentPage, List<Character> characters,
-            String message, bool hasMore)?
+    TResult Function(int currentPage, CharacterFilter filter,
+            List<Character> characters, String message, bool hasMore)?
         error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(currentPage, characters, message, hasMore);
+      return error(currentPage, filter, characters, message, hasMore);
     }
     return orElse();
   }
@@ -1401,12 +1701,15 @@ class _$CharactersErrorImpl implements CharactersError {
 abstract class CharactersError implements CharactersState {
   const factory CharactersError(
       {required final int currentPage,
+      final CharacterFilter filter,
       required final List<Character> characters,
       required final String message,
       final bool hasMore}) = _$CharactersErrorImpl;
 
   @override
   int get currentPage;
+  @override
+  CharacterFilter get filter;
   @override
   List<Character> get characters;
   String get message;

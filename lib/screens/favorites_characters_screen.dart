@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rick_and_morty/data/models/character.dart';
+import 'package:rick_and_morty/data/models/character_filter.dart';
 import 'package:rick_and_morty/data/repository/character_repository.dart';
+import 'package:rick_and_morty/widgets/sort_mtnu_button.dart';
 import '../../bloc/favorites/favorites_bloc.dart';
 import '../../widgets/characters_grid.dart';
 
@@ -30,6 +32,11 @@ class _FavoritesCharactersScreenState extends State<FavoritesCharactersScreen> {
       appBar: AppBar(
         title: const Text('Favorites'),
         backgroundColor: Colors.green[900],
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ],
       ),
       body: BlocBuilder<FavoritesBloc, FavoritesCharactersState>(
         builder: (context, state) {
@@ -74,7 +81,9 @@ class _FavoritesCharactersScreenState extends State<FavoritesCharactersScreen> {
             );
           }
           return FutureBuilder<List<Character>>(
-            future: context.read<ICharacterRepository>().getByIds(favoriteIds),
+            future: context
+                .read<ICharacterRepository>()
+                .getByIds(favoriteIds.toList()),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(

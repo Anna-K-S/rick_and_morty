@@ -95,13 +95,19 @@ class CharacterDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     IconButton(
-                        icon: Icon(
-                          isFavorite ? Icons.star : Icons.star_border_outlined,
-                          color: Colors.yellow[700],
-                        ),
-                        onPressed: () {
-                          onFavoriteToggle(!isFavorite);
-                        }),
+                      icon: Icon(
+                        isFavorite ? Icons.star : Icons.star_border_outlined,
+                        color: Colors.yellow[700],
+                      ),
+                      onPressed: () {
+                        context.read<FavoritesBloc>().add(
+                              CharacterFavoriteToggled(
+                                id: character.id,
+                                isFavorite: !isFavorite,
+                              ),
+                            );
+                      },
+                    ),
                   ],
                 ),
               ),

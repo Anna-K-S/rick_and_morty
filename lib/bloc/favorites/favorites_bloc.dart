@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rick_and_morty/data/models/character.dart';
+import 'package:rick_and_morty/data/models/character_filter.dart';
 import 'package:rick_and_morty/data/repository/favorites_characters_repository.dart';
 
 part 'favorites_event.dart';
@@ -17,6 +19,7 @@ class FavoritesBloc
       (event, emit) => switch (event) {
         CharacterFavoriteToggled() => _onToggled(event, emit),
         CharacterFavoriteLoaded() => _onLoaded(event, emit),
+        // TODO: Handle this case.
       },
       transformer: sequential(),
     );
@@ -30,7 +33,7 @@ class FavoritesBloc
       FavoritesCharactersLoaded(:final favorites) ||
       FavoritesCharactersLoading(:final favorites) ||
       FavoritesCharactersError(:final favorites) =>
-        favorites.toSet(),
+        favorites,
       FavoritesCharactersInitial() => null,
     };
 
@@ -42,25 +45,33 @@ class FavoritesBloc
 
     try {
       final contains = favorites.contains(id);
-
       if (contains && !event.isFavorite) {
-        emit(FavoritesCharactersState.loading(favorites: favorites));
+        emit(FavoritesCharactersState.loading(
+            favorites: favorites, characters: []));
         await _repository.removeFavorite(id);
+
+        final updated = List<int>.from(favorites)..remove(id);
+
         emit(
           FavoritesCharactersState.loaded(
-            favorites: favorites..remove(id),
+            favorites: updated,
+            characters: [],
           ),
         );
-
         return;
       }
+
       if (!contains && event.isFavorite) {
-        emit(FavoritesCharactersState.loading(favorites: favorites));
+        emit(FavoritesCharactersState.loading(
+            favorites: favorites, characters: []));
         await _repository.toggleFavorite(id);
+
+        final updated = List<int>.from(favorites)..add(id);
 
         emit(
           FavoritesCharactersState.loaded(
-            favorites: favorites..add(id),
+            favorites: updated,
+            characters: [],
           ),
         );
       }
@@ -69,6 +80,7 @@ class FavoritesBloc
         FavoritesCharactersState.error(
           error: e,
           favorites: favorites,
+          characters: [],
         ),
       );
     }
@@ -78,18 +90,20 @@ class FavoritesBloc
     CharacterFavoriteLoaded _,
     Emitter<FavoritesCharactersState> emit,
   ) async {
-    emit(FavoritesCharactersState.loading(favorites: const {}));
-    try {
-      final favoriteIds = await _repository.getFavoriteIds();
+    emit(FavoritesCharactersState.loading(favorites: const [], characters: []));
+    final favoriteIds = await _repository.getFavoriteIds();
 
+    try {
       emit(
         FavoritesCharactersState.loaded(
-          favorites: favoriteIds.toSet(),
+          favorites: favoriteIds,
+          characters: [],
         ),
       );
     } catch (e) {
       emit(
-        FavoritesCharactersState.error(error: e, favorites: const {}),
+        FavoritesCharactersState.error(
+            error: e, favorites: const [], characters: []),
       );
     }
   }

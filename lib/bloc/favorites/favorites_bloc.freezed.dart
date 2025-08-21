@@ -349,25 +349,33 @@ mixin _$FavoritesCharactersState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Set<int> favorites) loading,
-    required TResult Function(Set<int> favorites) loaded,
-    required TResult Function(Object? error, Set<int> favorites) error,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loading,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loaded,
+    required TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Set<int> favorites)? loading,
-    TResult? Function(Set<int> favorites)? loaded,
-    TResult? Function(Object? error, Set<int> favorites)? error,
+    TResult? Function(List<int> favorites, List<Character> characters)? loading,
+    TResult? Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult? Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Set<int> favorites)? loading,
-    TResult Function(Set<int> favorites)? loaded,
-    TResult Function(Object? error, Set<int> favorites)? error,
+    TResult Function(List<int> favorites, List<Character> characters)? loading,
+    TResult Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -466,9 +474,13 @@ class _$FavoritesCharactersInitialImpl implements FavoritesCharactersInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Set<int> favorites) loading,
-    required TResult Function(Set<int> favorites) loaded,
-    required TResult Function(Object? error, Set<int> favorites) error,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loading,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loaded,
+    required TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)
+        error,
   }) {
     return initial();
   }
@@ -477,9 +489,11 @@ class _$FavoritesCharactersInitialImpl implements FavoritesCharactersInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Set<int> favorites)? loading,
-    TResult? Function(Set<int> favorites)? loaded,
-    TResult? Function(Object? error, Set<int> favorites)? error,
+    TResult? Function(List<int> favorites, List<Character> characters)? loading,
+    TResult? Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult? Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
   }) {
     return initial?.call();
   }
@@ -488,9 +502,11 @@ class _$FavoritesCharactersInitialImpl implements FavoritesCharactersInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Set<int> favorites)? loading,
-    TResult Function(Set<int> favorites)? loaded,
-    TResult Function(Object? error, Set<int> favorites)? error,
+    TResult Function(List<int> favorites, List<Character> characters)? loading,
+    TResult Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -548,7 +564,7 @@ abstract class _$$FavoritesCharactersLoadingImplCopyWith<$Res> {
           $Res Function(_$FavoritesCharactersLoadingImpl) then) =
       __$$FavoritesCharactersLoadingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Set<int> favorites});
+  $Res call({List<int> favorites, List<Character> characters});
 }
 
 /// @nodoc
@@ -567,12 +583,17 @@ class __$$FavoritesCharactersLoadingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? favorites = null,
+    Object? characters = null,
   }) {
     return _then(_$FavoritesCharactersLoadingImpl(
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
-              as Set<int>,
+              as List<int>,
+      characters: null == characters
+          ? _value._characters
+          : characters // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
     ));
   }
 }
@@ -580,20 +601,31 @@ class __$$FavoritesCharactersLoadingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoritesCharactersLoadingImpl implements FavoritesCharactersLoading {
-  const _$FavoritesCharactersLoadingImpl({required final Set<int> favorites})
-      : _favorites = favorites;
+  const _$FavoritesCharactersLoadingImpl(
+      {required final List<int> favorites,
+      required final List<Character> characters})
+      : _favorites = favorites,
+        _characters = characters;
 
-  final Set<int> _favorites;
+  final List<int> _favorites;
   @override
-  Set<int> get favorites {
-    if (_favorites is EqualUnmodifiableSetView) return _favorites;
+  List<int> get favorites {
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_favorites);
+    return EqualUnmodifiableListView(_favorites);
+  }
+
+  final List<Character> _characters;
+  @override
+  List<Character> get characters {
+    if (_characters is EqualUnmodifiableListView) return _characters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_characters);
   }
 
   @override
   String toString() {
-    return 'FavoritesCharactersState.loading(favorites: $favorites)';
+    return 'FavoritesCharactersState.loading(favorites: $favorites, characters: $characters)';
   }
 
   @override
@@ -602,12 +634,16 @@ class _$FavoritesCharactersLoadingImpl implements FavoritesCharactersLoading {
         (other.runtimeType == runtimeType &&
             other is _$FavoritesCharactersLoadingImpl &&
             const DeepCollectionEquality()
-                .equals(other._favorites, _favorites));
+                .equals(other._favorites, _favorites) &&
+            const DeepCollectionEquality()
+                .equals(other._characters, _characters));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_favorites));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_favorites),
+      const DeepCollectionEquality().hash(_characters));
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
@@ -622,35 +658,43 @@ class _$FavoritesCharactersLoadingImpl implements FavoritesCharactersLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Set<int> favorites) loading,
-    required TResult Function(Set<int> favorites) loaded,
-    required TResult Function(Object? error, Set<int> favorites) error,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loading,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loaded,
+    required TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)
+        error,
   }) {
-    return loading(favorites);
+    return loading(favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Set<int> favorites)? loading,
-    TResult? Function(Set<int> favorites)? loaded,
-    TResult? Function(Object? error, Set<int> favorites)? error,
+    TResult? Function(List<int> favorites, List<Character> characters)? loading,
+    TResult? Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult? Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
   }) {
-    return loading?.call(favorites);
+    return loading?.call(favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Set<int> favorites)? loading,
-    TResult Function(Set<int> favorites)? loaded,
-    TResult Function(Object? error, Set<int> favorites)? error,
+    TResult Function(List<int> favorites, List<Character> characters)? loading,
+    TResult Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(favorites);
+      return loading(favorites, characters);
     }
     return orElse();
   }
@@ -695,9 +739,12 @@ class _$FavoritesCharactersLoadingImpl implements FavoritesCharactersLoading {
 
 abstract class FavoritesCharactersLoading implements FavoritesCharactersState {
   const factory FavoritesCharactersLoading(
-      {required final Set<int> favorites}) = _$FavoritesCharactersLoadingImpl;
+          {required final List<int> favorites,
+          required final List<Character> characters}) =
+      _$FavoritesCharactersLoadingImpl;
 
-  Set<int> get favorites;
+  List<int> get favorites;
+  List<Character> get characters;
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
@@ -713,7 +760,7 @@ abstract class _$$FavoritesCharactersLoadedImplCopyWith<$Res> {
           $Res Function(_$FavoritesCharactersLoadedImpl) then) =
       __$$FavoritesCharactersLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Set<int> favorites});
+  $Res call({List<int> favorites, List<Character> characters});
 }
 
 /// @nodoc
@@ -732,12 +779,17 @@ class __$$FavoritesCharactersLoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? favorites = null,
+    Object? characters = null,
   }) {
     return _then(_$FavoritesCharactersLoadedImpl(
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
-              as Set<int>,
+              as List<int>,
+      characters: null == characters
+          ? _value._characters
+          : characters // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
     ));
   }
 }
@@ -745,20 +797,31 @@ class __$$FavoritesCharactersLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoritesCharactersLoadedImpl implements FavoritesCharactersLoaded {
-  const _$FavoritesCharactersLoadedImpl({required final Set<int> favorites})
-      : _favorites = favorites;
+  const _$FavoritesCharactersLoadedImpl(
+      {required final List<int> favorites,
+      required final List<Character> characters})
+      : _favorites = favorites,
+        _characters = characters;
 
-  final Set<int> _favorites;
+  final List<int> _favorites;
   @override
-  Set<int> get favorites {
-    if (_favorites is EqualUnmodifiableSetView) return _favorites;
+  List<int> get favorites {
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_favorites);
+    return EqualUnmodifiableListView(_favorites);
+  }
+
+  final List<Character> _characters;
+  @override
+  List<Character> get characters {
+    if (_characters is EqualUnmodifiableListView) return _characters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_characters);
   }
 
   @override
   String toString() {
-    return 'FavoritesCharactersState.loaded(favorites: $favorites)';
+    return 'FavoritesCharactersState.loaded(favorites: $favorites, characters: $characters)';
   }
 
   @override
@@ -767,12 +830,16 @@ class _$FavoritesCharactersLoadedImpl implements FavoritesCharactersLoaded {
         (other.runtimeType == runtimeType &&
             other is _$FavoritesCharactersLoadedImpl &&
             const DeepCollectionEquality()
-                .equals(other._favorites, _favorites));
+                .equals(other._favorites, _favorites) &&
+            const DeepCollectionEquality()
+                .equals(other._characters, _characters));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_favorites));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_favorites),
+      const DeepCollectionEquality().hash(_characters));
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
@@ -787,35 +854,43 @@ class _$FavoritesCharactersLoadedImpl implements FavoritesCharactersLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Set<int> favorites) loading,
-    required TResult Function(Set<int> favorites) loaded,
-    required TResult Function(Object? error, Set<int> favorites) error,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loading,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loaded,
+    required TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)
+        error,
   }) {
-    return loaded(favorites);
+    return loaded(favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Set<int> favorites)? loading,
-    TResult? Function(Set<int> favorites)? loaded,
-    TResult? Function(Object? error, Set<int> favorites)? error,
+    TResult? Function(List<int> favorites, List<Character> characters)? loading,
+    TResult? Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult? Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
   }) {
-    return loaded?.call(favorites);
+    return loaded?.call(favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Set<int> favorites)? loading,
-    TResult Function(Set<int> favorites)? loaded,
-    TResult Function(Object? error, Set<int> favorites)? error,
+    TResult Function(List<int> favorites, List<Character> characters)? loading,
+    TResult Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(favorites);
+      return loaded(favorites, characters);
     }
     return orElse();
   }
@@ -859,10 +934,13 @@ class _$FavoritesCharactersLoadedImpl implements FavoritesCharactersLoaded {
 }
 
 abstract class FavoritesCharactersLoaded implements FavoritesCharactersState {
-  const factory FavoritesCharactersLoaded({required final Set<int> favorites}) =
+  const factory FavoritesCharactersLoaded(
+          {required final List<int> favorites,
+          required final List<Character> characters}) =
       _$FavoritesCharactersLoadedImpl;
 
-  Set<int> get favorites;
+  List<int> get favorites;
+  List<Character> get characters;
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
@@ -878,7 +956,7 @@ abstract class _$$FavoritesCharactersErrorImplCopyWith<$Res> {
           $Res Function(_$FavoritesCharactersErrorImpl) then) =
       __$$FavoritesCharactersErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Object? error, Set<int> favorites});
+  $Res call({Object? error, List<int> favorites, List<Character> characters});
 }
 
 /// @nodoc
@@ -898,13 +976,18 @@ class __$$FavoritesCharactersErrorImplCopyWithImpl<$Res>
   $Res call({
     Object? error = freezed,
     Object? favorites = null,
+    Object? characters = null,
   }) {
     return _then(_$FavoritesCharactersErrorImpl(
       error: freezed == error ? _value.error : error,
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
-              as Set<int>,
+              as List<int>,
+      characters: null == characters
+          ? _value._characters
+          : characters // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
     ));
   }
 }
@@ -913,22 +996,33 @@ class __$$FavoritesCharactersErrorImplCopyWithImpl<$Res>
 
 class _$FavoritesCharactersErrorImpl implements FavoritesCharactersError {
   const _$FavoritesCharactersErrorImpl(
-      {this.error, required final Set<int> favorites})
-      : _favorites = favorites;
+      {this.error,
+      required final List<int> favorites,
+      required final List<Character> characters})
+      : _favorites = favorites,
+        _characters = characters;
 
   @override
   final Object? error;
-  final Set<int> _favorites;
+  final List<int> _favorites;
   @override
-  Set<int> get favorites {
-    if (_favorites is EqualUnmodifiableSetView) return _favorites;
+  List<int> get favorites {
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_favorites);
+    return EqualUnmodifiableListView(_favorites);
+  }
+
+  final List<Character> _characters;
+  @override
+  List<Character> get characters {
+    if (_characters is EqualUnmodifiableListView) return _characters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_characters);
   }
 
   @override
   String toString() {
-    return 'FavoritesCharactersState.error(error: $error, favorites: $favorites)';
+    return 'FavoritesCharactersState.error(error: $error, favorites: $favorites, characters: $characters)';
   }
 
   @override
@@ -938,14 +1032,17 @@ class _$FavoritesCharactersErrorImpl implements FavoritesCharactersError {
             other is _$FavoritesCharactersErrorImpl &&
             const DeepCollectionEquality().equals(other.error, error) &&
             const DeepCollectionEquality()
-                .equals(other._favorites, _favorites));
+                .equals(other._favorites, _favorites) &&
+            const DeepCollectionEquality()
+                .equals(other._characters, _characters));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(_favorites));
+      const DeepCollectionEquality().hash(_favorites),
+      const DeepCollectionEquality().hash(_characters));
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
@@ -960,35 +1057,43 @@ class _$FavoritesCharactersErrorImpl implements FavoritesCharactersError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Set<int> favorites) loading,
-    required TResult Function(Set<int> favorites) loaded,
-    required TResult Function(Object? error, Set<int> favorites) error,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loading,
+    required TResult Function(List<int> favorites, List<Character> characters)
+        loaded,
+    required TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)
+        error,
   }) {
-    return error(this.error, favorites);
+    return error(this.error, favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Set<int> favorites)? loading,
-    TResult? Function(Set<int> favorites)? loaded,
-    TResult? Function(Object? error, Set<int> favorites)? error,
+    TResult? Function(List<int> favorites, List<Character> characters)? loading,
+    TResult? Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult? Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
   }) {
-    return error?.call(this.error, favorites);
+    return error?.call(this.error, favorites, characters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Set<int> favorites)? loading,
-    TResult Function(Set<int> favorites)? loaded,
-    TResult Function(Object? error, Set<int> favorites)? error,
+    TResult Function(List<int> favorites, List<Character> characters)? loading,
+    TResult Function(List<int> favorites, List<Character> characters)? loaded,
+    TResult Function(
+            Object? error, List<int> favorites, List<Character> characters)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error, favorites);
+      return error(this.error, favorites, characters);
     }
     return orElse();
   }
@@ -1033,11 +1138,14 @@ class _$FavoritesCharactersErrorImpl implements FavoritesCharactersError {
 
 abstract class FavoritesCharactersError implements FavoritesCharactersState {
   const factory FavoritesCharactersError(
-      {final Object? error,
-      required final Set<int> favorites}) = _$FavoritesCharactersErrorImpl;
+          {final Object? error,
+          required final List<int> favorites,
+          required final List<Character> characters}) =
+      _$FavoritesCharactersErrorImpl;
 
   Object? get error;
-  Set<int> get favorites;
+  List<int> get favorites;
+  List<Character> get characters;
 
   /// Create a copy of FavoritesCharactersState
   /// with the given fields replaced by the non-null parameter values.
