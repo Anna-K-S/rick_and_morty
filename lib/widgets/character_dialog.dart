@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/bloc/favorites/favorites_bloc.dart';
 import 'package:rick_and_morty/data/models/character.dart';
+import 'package:rick_and_morty/data/models/notifications.dart';
 
 class CharacterDialog extends StatelessWidget {
   final Character character;
@@ -106,6 +107,13 @@ class CharacterDialog extends StatelessWidget {
                                 isFavorite: !isFavorite,
                               ),
                             );
+
+                        if (!isFavorite) {
+                          showNotification(
+                            "Избранное",
+                            "${character.name} добавлен в избранное",
+                          );
+                        }
                       },
                     ),
                   ],

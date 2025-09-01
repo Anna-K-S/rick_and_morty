@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/widgets/sort_mtnu_button.dart';
+import 'package:rick_and_morty/widgets/sort_menu_button.dart';
 import '../bloc/characters/characters_bloc.dart';
 import '../../widgets/characters_grid.dart';
 

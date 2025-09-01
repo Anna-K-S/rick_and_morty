@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rick_and_morty/data/models/character.dart';
-import 'package:rick_and_morty/data/models/character_filter.dart';
 import 'package:rick_and_morty/data/repository/character_repository.dart';
-import 'package:rick_and_morty/widgets/sort_mtnu_button.dart';
 import '../../bloc/favorites/favorites_bloc.dart';
 import '../../widgets/characters_grid.dart';
 
