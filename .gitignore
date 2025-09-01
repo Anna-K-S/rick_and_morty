@@ -45,7 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
 ios/*.xcworkspace
 ios/*.xcodeproj/*
 ios/*.xcuserdata/
@@ -55,3 +54,5 @@ ios/Runner/Assets.xcassets/
 # Dependencies
 pubspec.lock
 
+# FVM Version Cache
+.fvm/

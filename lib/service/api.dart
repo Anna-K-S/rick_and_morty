@@ -14,4 +14,14 @@ abstract class Api {
 
   @GET("/character/{id}")
   Future<Character> getCharacterById(@Path("id") int id);
+
+  @GET("/character/{ids}")
+  Future<dynamic> getCharactersByIds(@Path("ids") String ids);
+
+  @GET("/character")
+  Future<CharacterList> getFilteredCharacters({
+    @Query("name") String? name,
+    @Query("status") String? status,
+    @Query("species") String? species,
+  });
 }

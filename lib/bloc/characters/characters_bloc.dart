@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rick_and_morty/data/models/character.dart';
+import 'package:rick_and_morty/data/models/character_filter.dart';
 import 'package:rick_and_morty/data/repository/character_repository.dart';
 
 part 'characters_event.dart';
@@ -12,12 +13,13 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final ICharacterRepository _repository;
 
   CharactersBloc(this._repository)
-      : super(const CharactersState.initial(currentPage: 1)) {
+      : super(CharactersState.initial(currentPage: 1)) {
     on<CharactersEvent>(
       (event, emit) => switch (event) {
         Started() => _onStarted(emit),
         LoadedMore() => _onLoadedMore(emit),
         Refreshed() => _onRefreshed(emit),
+        FilterChanged(:final filter) => _onFiltered(emit, filter),
       },
       transformer: sequential(),
     );
@@ -48,7 +50,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Future<void> _onLoadedMore(Emitter<CharactersState> emit) async {
     final currentState = state;
-    if (currentState is! Loaded || !currentState.hasMore) return;
+    if (currentState is! CharactersLoaded || !currentState.hasMore) return;
 
     final nextPage = currentState.currentPage + 1;
 
@@ -101,6 +103,54 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
           message: e.toString(),
           characters: state.characters,
           currentPage: state.currentPage,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onFiltered(
+    Emitter<CharactersState> emit,
+    CharacterFilter filter,
+  ) async {
+    emit(CharactersState.loading(
+      currentPage: state.currentPage,
+      characters: [],
+      filter: filter,
+    ));
+
+    try {
+      final response = await _repository.getFilter(filter);
+
+      List<Character> sorted = [...response.results];
+
+      switch (filter.sortBy) {
+        case SortBy.name:
+          sorted.sort(
+              (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+          break;
+        case SortBy.status:
+          sorted.sort((a, b) => a.status.compareTo(b.status));
+          break;
+        case SortBy.species:
+          sorted.sort((a, b) => a.species.compareTo(b.species));
+          break;
+        default:
+        // Если нужно - ничего не делать или какая-то логика
+      }
+
+      emit(CharactersState.loaded(
+        currentPage: state.currentPage,
+        characters: sorted,
+        filter: filter,
+        hasMore: sorted.isNotEmpty,
+      ));
+    } catch (e) {
+      emit(
+        CharactersState.error(
+          message: e.toString(),
+          characters: [],
+          currentPage: 1,
+          filter: filter,
         ),
       );
     }
